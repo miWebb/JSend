@@ -42,7 +42,6 @@ class JSend
 	 * @param array $data = []
 	 * @param string|null $message = null
 	 * @param int|null $code = null
-	 * @return void
 	 * @throws \UnexpectedValueException
 	 */
 	public function __construct($status, array $data = [], $message = null, $code = null)
