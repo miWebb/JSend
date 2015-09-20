@@ -1,2 +1,92 @@
 # JSend
-The PHP JSend implementation
+
+The PHP [JSend](https://labs.omniti.com/labs/jsend) implementation.
+
+## Examples
+
+### Use
+
+```PHP
+require 'vendor/autoload.php';
+
+use MWebbers/JSend/JSend;
+```
+
+### Create
+
+#### Success
+
+```PHP
+$jsend = new JSend('success', $data);
+$jsend = new JSend(JSend::SUCCESS, $data);
+$jsend = JSend::success($data);
+```
+
+#### Fail
+
+```PHP
+$jsend = new JSend('fail', $data);
+$jsend = new JSend(JSend::FAIL, $data);
+$jsend = JSend::fail($data);
+```
+
+#### Error
+
+```PHP
+$jsend = new JSend('error', $data, $message, $code);
+$jsend = new JSend(JSend::ERROR, $data, $message, $code);
+$jsend = JSend::error($message, $code, $data);
+```
+
+#### Decode
+
+```PHP
+try {
+	$jsend = JSend::decode($json);
+} catch(UnexpectedValueException $e) {
+	// Error message
+}
+```
+
+### Output
+
+#### Variable
+
+```PHP
+$json = $jsend->decode();
+$json = (string) $jsend;
+```
+
+#### Print
+
+```PHP
+$jsend->send();
+```
+
+### Methods
+
+```PHP
+$jsend = new JSend(JSend::SUCCESS, $data);
+$jsend->__toString();
+$jsend->__toArray();
+$jsend->encode();
+$jsend->isSuccess();
+$jsend->isFail();
+$jsend->isError();
+$jsend->getStatus();
+$jsend->setStatus($status);
+$jsend->getData();
+$jsend->setData($data = []);
+$jsend->getMessage();
+$jsend->setMessage($message = null);
+$jsend->getCode();
+$jsend->setCode($code = null);
+$jsend->send();
+```
+
+```PHP
+JSend::success($data);
+JSend::fail($data);
+JSend::error($message, $code, $data);
+JSend::decode($input);
+```
