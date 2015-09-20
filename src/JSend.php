@@ -68,7 +68,7 @@ class JSend
 	 *
 	 * @return array the array representation of the object.
 	 */
-	public function __toArray()
+	public function toArray()
 	{
 		$result = ['status' => $this->status];
 
@@ -174,7 +174,7 @@ class JSend
 	 */
 	public function encode()
 	{
-		return json_encode($this->__toArray());
+		return json_encode($this->toArray());
 	}
 
 	/**

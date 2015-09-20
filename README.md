@@ -68,7 +68,7 @@ $jsend->send();
 ```PHP
 $jsend = new JSend(JSend::SUCCESS, $data);
 $jsend->__toString();
-$jsend->__toArray();
+$jsend->toArray();
 $jsend->encode();
 $jsend->isSuccess();
 $jsend->isFail();

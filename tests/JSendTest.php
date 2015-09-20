@@ -54,11 +54,11 @@ class JSendTest extends \PHPUnit_Framework_TestCase
 		$this->assertJsonStringEqualsJsonString(self::JSON_ERROR, (string) $this->error);
 	}
 
-	public function test__toArray()
+	public function testToArray()
 	{
-		$this->assertEquals(['status' => JSend::SUCCESS, 'data' => $this->successData], $this->success->__toArray());
-		$this->assertEquals(['status' => JSend::FAIL, 'data' => []], $this->fail->__toArray());
-		$this->assertEquals(['status' => JSend::ERROR, 'message' => self::ERROR_MESSAGE, 'code' => self::ERROR_CODE], $this->error->__toArray());
+		$this->assertEquals(['status' => JSend::SUCCESS, 'data' => $this->successData], $this->success->toArray());
+		$this->assertEquals(['status' => JSend::FAIL, 'data' => []], $this->fail->toArray());
+		$this->assertEquals(['status' => JSend::ERROR, 'message' => self::ERROR_MESSAGE, 'code' => self::ERROR_CODE], $this->error->toArray());
 	}
 
 	public function testSuccess()
