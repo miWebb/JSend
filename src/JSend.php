@@ -80,7 +80,7 @@ class JSend
 					$result['code'] = $this->code;
 				}
 
-				if ($this->data) {
+				if (!empty($this->data)) {
 					$result['data'] = $this->data;
 				}
 
