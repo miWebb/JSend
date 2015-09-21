@@ -1,3 +1,7 @@
+[![Build Status](https://scrutinizer-ci.com/g/mwebbers/JSend/badges/build.png?b=master)](https://scrutinizer-ci.com/g/mwebbers/JSend/build-status/master)
+[![Code Coverage](https://scrutinizer-ci.com/g/mwebbers/JSend/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/mwebbers/JSend/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mwebbers/JSend/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/mwebbers/JSend/?branch=master)
+
 # JSend
 
 The PHP [JSend](https://labs.omniti.com/labs/jsend) implementation.
