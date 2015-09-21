@@ -135,8 +135,12 @@ class JSend
 	{
 		$json = json_decode($input, true);
 
+		if ($json === null) {
+			throw new \UnexpectedValueException('JSend JSON can not be decoded.');
+		}
+
 		if (!isset($json['status'])) {
-			throw new \UnexpectedValueException('JSend requires a status.');
+			throw new \UnexpectedValueException('JSend objects require a status.');
 		}
 
 		$result = new JSend($json['status']);
@@ -144,7 +148,7 @@ class JSend
 		switch ($result->getStatus()) {
 			case self::ERROR:
 				if (!isset($json['message'])) {
-					throw new \UnexpectedValueException('JSend error requires a message.');
+					throw new \UnexpectedValueException('JSend error objects require a message.');
 				}
 
 				$result->setData(isset($json['data']) ? $json['data'] : []);
@@ -155,7 +159,7 @@ class JSend
 
 			default:
 				if (!isset($json['data'])) {
-					throw new \UnexpectedValueException('JSend success and fail requires data.');
+					throw new \UnexpectedValueException('JSend success and fail objects require data.');
 				}
 
 				$result->setData($json['data']);

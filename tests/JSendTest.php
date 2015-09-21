@@ -26,10 +26,10 @@ class JSendTest extends \PHPUnit_Framework_TestCase
 
 	const JSON_SUCCESS = '{"status":"success","data":{"post":{"id":1,"name":"test"}}}';
 	const JSON_FAIL = '{"status":"fail","data":[]}';
-	const JSON_ERROR = '{"status":"error","message":"Internal Server error.","code":500}';
+	const JSON_ERROR = '{"status":"error","message":"Internal Server error.","code":500,"data":{"post":{"id":1,"name":"test"}}}';
 
-	/** @var array The success data. */
-	private $successData = ['post' => ['id' => 1, 'name' => 'test']];
+	/** @var array The data. */
+	private $data = ['post' => ['id' => 1, 'name' => 'test']];
 
 	/** @var JSend The JSend success object. */
 	private $success;
@@ -42,9 +42,9 @@ class JSendTest extends \PHPUnit_Framework_TestCase
 
 	public function setUp()
 	{
-		$this->success = new JSend(JSend::SUCCESS, $this->successData);
+		$this->success = new JSend(JSend::SUCCESS, $this->data);
 		$this->fail = new JSend(JSEND::FAIL, []);
-		$this->error = new JSend(JSEND::ERROR, [], self::ERROR_MESSAGE, self::ERROR_CODE);
+		$this->error = new JSend(JSEND::ERROR, $this->data, self::ERROR_MESSAGE, self::ERROR_CODE);
 	}
 
 	public function test__toString()
@@ -56,14 +56,14 @@ class JSendTest extends \PHPUnit_Framework_TestCase
 
 	public function testToArray()
 	{
-		$this->assertEquals(['status' => JSend::SUCCESS, 'data' => $this->successData], $this->success->toArray());
+		$this->assertEquals(['status' => JSend::SUCCESS, 'data' => $this->data], $this->success->toArray());
 		$this->assertEquals(['status' => JSend::FAIL, 'data' => []], $this->fail->toArray());
-		$this->assertEquals(['status' => JSend::ERROR, 'message' => self::ERROR_MESSAGE, 'code' => self::ERROR_CODE], $this->error->toArray());
+		$this->assertEquals(['status' => JSend::ERROR, 'message' => self::ERROR_MESSAGE, 'code' => self::ERROR_CODE, 'data' => $this->data], $this->error->toArray());
 	}
 
 	public function testSuccess()
 	{
-		$this->assertEquals($this->success, JSend::success($this->successData));
+		$this->assertEquals($this->success, JSend::success($this->data));
 	}
 
 	public function testFail()
@@ -73,7 +73,7 @@ class JSendTest extends \PHPUnit_Framework_TestCase
 
 	public function testError()
 	{
-		$this->assertEquals($this->error, JSend::error(self::ERROR_MESSAGE, self::ERROR_CODE, []));
+		$this->assertEquals($this->error, JSend::error(self::ERROR_MESSAGE, self::ERROR_CODE, $this->data));
 	}
 
 	public function testDecode()
@@ -81,6 +81,42 @@ class JSendTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($this->success, JSend::decode(self::JSON_SUCCESS));
 		$this->assertEquals($this->fail, JSend::decode(self::JSON_FAIL));
 		$this->assertEquals($this->error, JSend::decode(self::JSON_ERROR));
+	}
+
+	/**
+	 * @expectedException \UnexpectedValueException
+	 * @expectedExceptionMessage JSend JSON can not be decoded.
+	 */
+	public function testDecodeCannotDecode()
+	{
+		JSend::decode('');
+	}
+
+	/**
+	 * @expectedException \UnexpectedValueException
+	 * @expectedExceptionMessage JSend objects require a status.
+	 */
+	public function testDecodeNoStatus()
+	{
+		JSend::decode('{}');
+	}
+
+	/**
+	 * @expectedException \UnexpectedValueException
+	 * @expectedExceptionMessage JSend error objects require a message.
+	 */
+	public function testDecodeNoMessage()
+	{
+		JSend::decode('{"status": "error"}');
+	}
+
+	/**
+	 * @expectedException \UnexpectedValueException
+	 * @expectedExceptionMessage JSend success and fail objects require data.
+	 */
+	public function testDecodeNoData()
+	{
+		JSend::decode('{"status": "success"}');
 	}
 
 	public function testEncode()
@@ -122,9 +158,18 @@ class JSendTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals(JSend::FAIL, $this->success->getStatus());
 	}
 
+	/**
+	 * @expectedException \UnexpectedValueException
+	 * @expectedExceptionMessage test is not a valid JSend status.
+	 */
+	public function testExceptionSetStatus()
+	{
+		$this->success->setStatus('test');
+	}
+
 	public function testGetData()
 	{
-		$this->assertEquals($this->successData, $this->success->getData());
+		$this->assertEquals($this->data, $this->success->getData());
 	}
 
 	public function testSetData()
