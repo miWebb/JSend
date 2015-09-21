@@ -1,0 +1,36 @@
+{
+	"name": "mwebbers/jsend",
+	"description": "The PHP JSend implementations",
+	"type": "library",
+	"keywords": [
+		"api",
+		"jsend",
+		"json"
+	],
+	"homepage": "http://webbers.io/php/jsend/",
+	"license": "Apache-2.0",
+	"authors": [
+		{
+			"name": "Michael Webbers",
+			"email": "michael@webbers.io",
+            "homepage": "http://webbers.io",
+            "role": "Developer"
+		}
+	],
+	"require": {
+		"php": ">=5.4.0"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "4.8.*"
+	},
+	"autoload": {
+		"psr-4": {
+			"MWebbers\\JSend\\": "src/"
+		}
+	},
+    "autoload-dev": {
+		"psr-4": {
+			"MWebbers\\JSend\\Tests\\": "tests/"
+		}
+	}
+}
