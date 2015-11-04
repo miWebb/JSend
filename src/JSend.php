@@ -144,35 +144,85 @@ class JSend
 			throw new \UnexpectedValueException('JSend JSON can not be decoded.');
 		}
 
+		return self::decodeJson($json);
+	}
+
+	/**
+	 * Returns the decoded JSend input.
+	 *
+	 * @param array $json
+	 * @return JSend the decoded JSend input.
+	 * @throws \UnexpectedValueException
+	 */
+	public static function decodeJson(array $json)
+	{
 		if (!isset($json['status'])) {
 			throw new \UnexpectedValueException('JSend objects require a status.');
 		}
 
-		$result = new JSend($json['status']);
+		switch ($json['status']) {
+			case self::SUCCESS:
+				return self::decodeSucces($json);
 
-		switch ($result->getStatus()) {
+			case self::FAIL:
+				return self::decodeFail($json);
+
 			case self::ERROR:
-				if (!isset($json['message'])) {
-					throw new \UnexpectedValueException('JSend error objects require a message.');
-				}
-
-				$result->setData(isset($json['data']) ? $json['data'] : []);
-				$result->setMessage($json['message']);
-				$result->setCode(isset($json['code']) ? $json['code'] : null);
-
-				break;
-
-			default:
-				if (!isset($json['data'])) {
-					throw new \UnexpectedValueException('JSend success and fail objects require data.');
-				}
-
-				$result->setData($json['data']);
-
-				break;
+				return self::decodeError($json);
 		}
 
-		return $result;
+		throw new \UnexpectedValueException($json['status'] . ' is not a valid JSend status.');
+	}
+
+	/**
+	 * Returns the decoded jSend succes object.
+	 *
+	 * @param array $json
+	 * @return JSend the decoded jSend succes object.
+	 * @throws \UnexpectedValueException
+	 */
+	public static function decodeSucces(array $json)
+	{
+		if (!isset($json['data'])) {
+			throw new \UnexpectedValueException('JSend success objects require data.');
+		}
+
+		return self::success($json['data']);
+	}
+
+	/**
+	 * Returns the decoded jSend fail object.
+	 *
+	 * @param array $json
+	 * @return JSend the decoded jSend fail object.
+	 * @throws \UnexpectedValueException
+	 */
+	public static function decodeFail(array $json)
+	{
+		if (!isset($json['data'])) {
+			throw new \UnexpectedValueException('JSend fail objects require data.');
+		}
+
+		return self::fail($json['data']);
+	}
+
+	/**
+	 * Returns the decoded jSend error object.
+	 *
+	 * @param array $json
+	 * @return JSend the decoded jSend error object.
+	 * @throws \UnexpectedValueException
+	 */
+	public static function decodeError(array $json)
+	{
+		if (!isset($json['message'])) {
+			throw new \UnexpectedValueException('JSend error objects require a message.');
+		}
+
+		$code = isset($json['code']) ? $json['code'] : null;
+		$data = isset($json['data']) ? $json['data'] : [];
+
+		return self::error($json['message'], $code, $data);
 	}
 
 	/**
