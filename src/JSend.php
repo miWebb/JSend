@@ -97,6 +97,7 @@ class JSend
 	/**
 	 * Returns a JSend succes object with the given data.
 	 *
+	 * @param array $data
 	 * @return JSend a JSend succes object with the given data.
 	 */
 	public static function success(array $data)
@@ -107,6 +108,7 @@ class JSend
 	/**
 	 * Returns a JSend fail object with the given data.
 	 *
+	 * @param array $data
 	 * @return JSend a JSend fail object with the given data.
 	 */
 	public static function fail(array $data)
@@ -117,6 +119,9 @@ class JSend
 	/**
 	 * Returns a JSend error object with the given message, code and data.
 	 *
+	 * @param string $message
+	 * @param int|null $code = null
+	 * @param array $data = []
 	 * @return JSend a JSend error object with the given message, code and data.
 	 */
 	public static function error($message, $code = null, array $data = [])
@@ -125,10 +130,10 @@ class JSend
 	}
 
 	/**
-	 * Returns the decoded JSend input.
+	 * Returns the decoded JSend object.
 	 *
 	 * @param string $input
-	 * @return JSend the decoded JSend input.
+	 * @return JSend the decoded JSend object.
 	 * @throws \UnexpectedValueException
 	 */
 	public static function decode($input)
