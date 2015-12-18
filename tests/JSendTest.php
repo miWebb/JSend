@@ -103,20 +103,38 @@ class JSendTest extends \PHPUnit_Framework_TestCase
 
 	/**
 	 * @expectedException \UnexpectedValueException
+	 * @expectedExceptionMessage JSend success objects require data.
+	 */
+	public function testDecodeSuccesRequireData()
+	{
+		JSend::decode('{"status": "success"}');
+	}
+
+	/**
+	 * @expectedException \UnexpectedValueException
+	 * @expectedExceptionMessage JSend fail objects require data.
+	 */
+	public function testDecodeFailRequireData()
+	{
+		JSend::decode('{"status": "fail"}');
+	}
+
+	/**
+	 * @expectedException \UnexpectedValueException
 	 * @expectedExceptionMessage JSend error objects require a message.
 	 */
-	public function testDecodeNoMessage()
+	public function testDecodeErrorRequireMessage()
 	{
 		JSend::decode('{"status": "error"}');
 	}
 
 	/**
 	 * @expectedException \UnexpectedValueException
-	 * @expectedExceptionMessage JSend success and fail objects require data.
+	 * @expectedExceptionMessage test is not a valid JSend status.
 	 */
-	public function testDecodeNoData()
+	public function testDecodeExistingStatus()
 	{
-		JSend::decode('{"status": "success"}');
+		JSend::decode('{"status": "test"}');
 	}
 
 	public function testEncode()
