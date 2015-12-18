@@ -232,7 +232,7 @@ class JSend
 	 */
 	public function encode()
 	{
-		return json_encode($this->toArray());
+		return json_encode($this->toArray(), \JSON_NUMERIC_CHECK);
 	}
 
 	/**
