@@ -97,10 +97,10 @@ class JSend
 	/**
 	 * Returns a JSend succes object with the given data.
 	 *
-	 * @param array $data
+	 * @param array|null $data
 	 * @return JSend a JSend succes object with the given data.
 	 */
-	public static function success(array $data)
+	public static function success(array $data = null)
 	{
 		return new self(self::SUCCESS, $data);
 	}
@@ -108,10 +108,10 @@ class JSend
 	/**
 	 * Returns a JSend fail object with the given data.
 	 *
-	 * @param array $data
+	 * @param array|null $data
 	 * @return JSend a JSend fail object with the given data.
 	 */
-	public static function fail(array $data)
+	public static function fail(array $data = null)
 	{
 		return new self(self::FAIL, $data);
 	}
@@ -220,7 +220,7 @@ class JSend
 		}
 
 		$code = array_key_exists('code', $json) ? $json['code'] : null;
-		$data = array_key_exists('data', $json) ? $json['data'] : [];
+		$data = array_key_exists('data', $json) ? $json['data'] : null;
 
 		return self::error($json['message'], $code, $data);
 	}
