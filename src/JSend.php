@@ -156,7 +156,7 @@ class JSend
 	 */
 	public static function decodeJson(array $json)
 	{
-		if (!isset($json['status'])) {
+		if (!array_key_exists('status', $json)) {
 			throw new \UnexpectedValueException('JSend objects require a status.');
 		}
 
@@ -183,7 +183,7 @@ class JSend
 	 */
 	public static function decodeSucces(array $json)
 	{
-		if (!isset($json['data'])) {
+		if (!array_key_exists('data', $json)) {
 			throw new \UnexpectedValueException('JSend success objects require data.');
 		}
 
@@ -199,7 +199,7 @@ class JSend
 	 */
 	public static function decodeFail(array $json)
 	{
-		if (!isset($json['data'])) {
+		if (!array_key_exists('data', $json)) {
 			throw new \UnexpectedValueException('JSend fail objects require data.');
 		}
 
@@ -215,12 +215,12 @@ class JSend
 	 */
 	public static function decodeError(array $json)
 	{
-		if (!isset($json['message'])) {
+		if (!array_key_exists('message', $json)) {
 			throw new \UnexpectedValueException('JSend error objects require a message.');
 		}
 
-		$code = isset($json['code']) ? $json['code'] : null;
-		$data = isset($json['data']) ? $json['data'] : [];
+		$code = array_key_exists('code', $json) ? $json['code'] : null;
+		$data = array_key_exists('data', $json) ? $json['data'] : [];
 
 		return self::error($json['message'], $code, $data);
 	}
