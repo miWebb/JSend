@@ -39,12 +39,12 @@ class JSend
 	 * Construct a JSend object with the given status, data, message and code.
 	 *
 	 * @param string $status
-	 * @param array $data = []
+	 * @param array|null $data = null
 	 * @param string|null $message = null
 	 * @param int|null $code = null
 	 * @throws \UnexpectedValueException
 	 */
-	public function __construct($status, array $data = [], $message = null, $code = null)
+	public function __construct($status, array $data = null, $message = null, $code = null)
 	{
 		$this->setStatus($status);
 		$this->setData($data);
@@ -306,10 +306,10 @@ class JSend
 	/**
 	 * Set the data.
 	 *
-	 * @param array $data = []
+	 * @param array|null $data = null
 	 * @return JSend $this
 	 */
-	public function setData(array $data = [])
+	public function setData(array $data = null)
 	{
 		$this->data = $data;
 

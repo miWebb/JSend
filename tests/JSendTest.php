@@ -170,6 +170,9 @@ class JSendTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals(JSend::SUCCESS, $this->success->getStatus());
 	}
 
+	/**
+	 * @depends testGetStatus
+	 */
 	public function testSetStatus()
 	{
 		$this->success->setStatus(JSend::FAIL);
@@ -177,6 +180,7 @@ class JSendTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * @depends testSetStatus
 	 * @expectedException \UnexpectedValueException
 	 * @expectedExceptionMessage test is not a valid JSend status.
 	 */
@@ -190,10 +194,24 @@ class JSendTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($this->data, $this->success->getData());
 	}
 
+	/**
+	 * @depends testGetData
+	 */
 	public function testSetData()
 	{
+		$data = ['key' => 'value'];
+
+		$this->success->setData($data);
+		$this->assertEquals($data, $this->success->getData());
+	}
+
+	/**
+	 * @depends testGetData
+	 */
+	public function testSetDataNull()
+	{
 		$this->success->setData();
-		$this->assertEmpty($this->success->getData());
+		$this->assertNull($this->success->getData());
 	}
 
 	public function testGetMessage()
@@ -201,6 +219,9 @@ class JSendTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals(self::ERROR_MESSAGE, $this->error->getMessage());
 	}
 
+	/**
+	 * @depends testGetMessage
+	 */
 	public function testSetMessage()
 	{
 		$this->error->setMessage('');
@@ -212,6 +233,9 @@ class JSendTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals(500, $this->error->getCode());
 	}
 
+	/**
+	 * @depends testGetCode
+	 */
 	public function testSetCode()
 	{
 		$this->error->setCode();
