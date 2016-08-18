@@ -66,14 +66,29 @@ class JSendTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($this->success, JSend::success($this->data));
 	}
 
+	public function testSuccessNull()
+	{
+		$this->assertEquals($this->success->setData(null), JSend::success());
+	}
+
 	public function testFail()
 	{
 		$this->assertEquals($this->fail, JSend::fail([]));
 	}
 
+	public function testFailNull()
+	{
+		$this->assertEquals($this->fail->setData(null), JSend::fail(null));
+	}
+
 	public function testError()
 	{
 		$this->assertEquals($this->error, JSend::error(self::ERROR_MESSAGE, self::ERROR_CODE, $this->data));
+	}
+
+	public function testErrorNull()
+	{
+		$this->assertEquals($this->error->setCode()->setData(), JSend::error(self::ERROR_MESSAGE, null, null));
 	}
 
 	public function testDecode()
