@@ -80,7 +80,7 @@ $jsend->isError();
 $jsend->getStatus();
 $jsend->setStatus($status);
 $jsend->getData();
-$jsend->setData($data = []);
+$jsend->setData($data = null);
 $jsend->getMessage();
 $jsend->setMessage($message = null);
 $jsend->getCode();
@@ -89,8 +89,8 @@ $jsend->send();
 ```
 
 ```PHP
-JSend::success($data);
+JSend::success($data = null);
 JSend::fail($data);
-JSend::error($message, $code, $data);
+JSend::error($message, $code = null, $data = null);
 JSend::decode($input);
 ```

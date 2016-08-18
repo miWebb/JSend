@@ -121,10 +121,10 @@ class JSend
 	 *
 	 * @param string $message
 	 * @param int|null $code = null
-	 * @param array $data = []
+	 * @param array $data = null
 	 * @return JSend a JSend error object with the given message, code and data.
 	 */
-	public static function error($message, $code = null, array $data = [])
+	public static function error($message, $code = null, array $data = null)
 	{
 		return new self(self::ERROR, $data, $message, $code);
 	}
