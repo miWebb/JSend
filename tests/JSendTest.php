@@ -262,7 +262,7 @@ class JSendTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testSend()
 	{
-        $this->expectOutputString((string) $this->success);
+		$this->expectOutputString((string) $this->success);
 		$this->success->send();
 	}
 }
