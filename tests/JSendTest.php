@@ -9,9 +9,7 @@
  * @version 1.0.0
  */
 
-namespace MWebbers\JSend\Tests;
-
-use MWebbers\JSend\JSend;
+namespace MWebbers\JSend;
 
 /**
  * The JSend test class.
