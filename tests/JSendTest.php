@@ -245,9 +245,29 @@ class JSendTest extends TestCase
 	/**
 	 * @runInSeparateProcess
 	 */
-	public function testSend()
+	public function testSendSuccess()
 	{
 		$this->expectOutputString((string) $this->success);
 		$this->success->send();
+	}
+
+	/**
+	 * @depends testSendSuccess
+	 * @runInSeparateProcess
+	 */
+	public function testSendFail()
+	{
+		$this->expectOutputString((string) $this->fail);
+		$this->fail->send();
+	}
+
+	/**
+	 * @depends testSendFail
+	 * @runInSeparateProcess
+	 */
+	public function testSendError()
+	{
+		$this->expectOutputString((string) $this->error);
+		$this->error->send();
 	}
 }
