@@ -5,20 +5,16 @@ matrix:
   - php: 7.0
   - php: 7.1
   - php: hhvm
-  - php: hhvm-nightly
 
   allow_failures:
     - php: hhvm
-    - php: hhvm-nightly
 
 before_install:
+  - if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then echo hhvm.php7.all=1 >> /etc/hhvm/php.ini; fi
   - composer self-update
 
 install:
   - composer install
-
-before_script:
-  - if [[ $TRAVIS_PHP_VERSION = hhv* ]]; then echo hhvm.php7.all=1 >> /etc/hhvm/php.ini; fi
 
 script:
   - vendor/bin/phpunit --verbose
