@@ -232,7 +232,7 @@ class JSend
 	 */
 	public function encode()
 	{
-		return json_encode($this->toArray(), \JSON_NUMERIC_CHECK);
+		return json_encode($this->toArray());
 	}
 
 	/**
@@ -369,6 +369,12 @@ class JSend
 	 */
 	public function send()
 	{
+		if ($this->status === self::FAIL) {
+			http_response_code(400);
+		} elseif ($this->status === self::ERROR) {
+			http_response_code(500);
+		}
+
 		header('Content-Type: application/json');
 		echo (string) $this;
 	}

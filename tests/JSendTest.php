@@ -9,9 +9,7 @@
  * @version 1.0.0
  */
 
-namespace MWebbers\JSend\Tests;
-
-use MWebbers\JSend\JSend;
+namespace MWebbers\JSend;
 
 /**
  * The JSend test class.
@@ -262,7 +260,7 @@ class JSendTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testSend()
 	{
-        $this->expectOutputString((string) $this->success);
+		$this->expectOutputString((string) $this->success);
 		$this->success->send();
 	}
 }

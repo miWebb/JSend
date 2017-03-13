@@ -13,8 +13,8 @@
 		{
 			"name": "Michael Webbers",
 			"email": "michael@webbers.io",
-            "homepage": "http://webbers.io",
-            "role": "Developer"
+			"homepage": "http://webbers.io",
+			"role": "Developer"
 		}
 	],
 	"require": {
@@ -28,9 +28,9 @@
 			"MWebbers\\JSend\\": "src/"
 		}
 	},
-    "autoload-dev": {
+	"autoload-dev": {
 		"psr-4": {
-			"MWebbers\\JSend\\Tests\\": "tests/"
+			"MWebbers\\JSend\\": "tests/"
 		}
 	}
 }
