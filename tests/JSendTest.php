@@ -11,13 +11,15 @@
 
 namespace MWebbers\JSend;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * The JSend test class.
  *
  * @since 1.0.0
  * @see http://labs.omniti.com/labs/jsend
  */
-class JSendTest extends \PHPUnit_Framework_TestCase
+class JSendTest extends TestCase
 {
 	const ERROR_MESSAGE = 'Internal Server error.';
 	const ERROR_CODE = 500;
@@ -243,9 +245,29 @@ class JSendTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * @runInSeparateProcess
 	 */
-	public function testSend()
+	public function testSendSuccess()
 	{
 		$this->expectOutputString((string) $this->success);
 		$this->success->send();
+	}
+
+	/**
+	 * @depends testSendSuccess
+	 * @runInSeparateProcess
+	 */
+	public function testSendFail()
+	{
+		$this->expectOutputString((string) $this->fail);
+		$this->fail->send();
+	}
+
+	/**
+	 * @depends testSendFail
+	 * @runInSeparateProcess
+	 */
+	public function testSendError()
+	{
+		$this->expectOutputString((string) $this->error);
+		$this->error->send();
 	}
 }
