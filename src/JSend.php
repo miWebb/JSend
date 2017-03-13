@@ -39,12 +39,12 @@ class JSend
 	 * Construct a JSend object with the given status, data, message and code.
 	 *
 	 * @param string $status
-	 * @param array|null $data = null
+	 * @param array $data = []
 	 * @param string|null $message = null
 	 * @param int|null $code = null
 	 * @throws \UnexpectedValueException
 	 */
-	public function __construct($status, array $data = null, $message = null, $code = null)
+	public function __construct($status, array $data = [], $message = null, $code = null)
 	{
 		$this->setStatus($status);
 		$this->setData($data);
@@ -97,10 +97,10 @@ class JSend
 	/**
 	 * Returns a JSend succes object with the given data.
 	 *
-	 * @param array|null $data
+	 * @param array $data = []
 	 * @return JSend a JSend succes object with the given data.
 	 */
-	public static function success(array $data = null)
+	public static function success(array $data = [])
 	{
 		return new self(self::SUCCESS, $data);
 	}
@@ -108,10 +108,10 @@ class JSend
 	/**
 	 * Returns a JSend fail object with the given data.
 	 *
-	 * @param array|null $data
+	 * @param array $data = []
 	 * @return JSend a JSend fail object with the given data.
 	 */
-	public static function fail(array $data = null)
+	public static function fail(array $data = [])
 	{
 		return new self(self::FAIL, $data);
 	}
@@ -121,10 +121,10 @@ class JSend
 	 *
 	 * @param string $message
 	 * @param int|null $code = null
-	 * @param array $data = null
+	 * @param array $data = []
 	 * @return JSend a JSend error object with the given message, code and data.
 	 */
-	public static function error($message, $code = null, array $data = null)
+	public static function error($message, $code = null, array $data = [])
 	{
 		return new self(self::ERROR, $data, $message, $code);
 	}
@@ -306,10 +306,10 @@ class JSend
 	/**
 	 * Set the data.
 	 *
-	 * @param array|null $data = null
+	 * @param array $data = []
 	 * @return JSend $this
 	 */
-	public function setData(array $data = null)
+	public function setData(array $data = [])
 	{
 		$this->data = $data;
 
