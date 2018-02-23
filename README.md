@@ -1,6 +1,6 @@
-[![Build Status](https://scrutinizer-ci.com/g/mwebbers/JSend/badges/build.png?b=master)](https://scrutinizer-ci.com/g/mwebbers/JSend/build-status/master)
-[![Code Coverage](https://scrutinizer-ci.com/g/mwebbers/JSend/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/mwebbers/JSend/?branch=master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mwebbers/JSend/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/mwebbers/JSend/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/miwebb/JSend/badges/build.png?b=master)](https://scrutinizer-ci.com/g/miwebb/JSend/build-status/master)
+[![Code Coverage](https://scrutinizer-ci.com/g/miwebb/JSend/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/miwebb/JSend/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/miwebb/JSend/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/miwebb/JSend/?branch=master)
 
 # JSend
 
@@ -13,7 +13,7 @@ The PHP [JSend](https://labs.omniti.com/labs/jsend) implementation.
 ```PHP
 require 'vendor/autoload.php';
 
-use MWebbers/JSend/JSend;
+use miWebb/JSend/JSend;
 ```
 
 ### Create

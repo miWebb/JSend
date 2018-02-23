@@ -1,5 +1,5 @@
 {
-	"name": "mwebbers/jsend",
+	"name": "miwebb/jsend",
 	"description": "The PHP JSend implementations",
 	"type": "library",
 	"keywords": [
@@ -25,12 +25,12 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"MWebbers\\JSend\\": "src/"
+			"miWebb\\JSend\\": "src/"
 		}
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"MWebbers\\JSend\\": "tests/"
+			"miWebb\\JSend\\": "tests/"
 		}
 	}
 }
