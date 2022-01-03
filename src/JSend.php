@@ -26,7 +26,7 @@ class JSend
 	/** @var string The status. */
 	private $status;
 
-	/** @var array The data. */
+	/** @var mixed The data. */
 	private $data;
 
 	/** @var string|null The message. */
@@ -39,12 +39,12 @@ class JSend
 	 * Construct a JSend object with the given status, data, message and code.
 	 *
 	 * @param string $status
-	 * @param array|null $data = null
+	 * @param mixed $data = null
 	 * @param string|null $message = null
 	 * @param int|null $code = null
 	 * @throws \UnexpectedValueException
 	 */
-	public function __construct($status, array $data = null, $message = null, $code = null)
+	public function __construct($status, $data = null, $message = null, $code = null)
 	{
 		$this->setStatus($status);
 		$this->setData($data);
@@ -97,10 +97,10 @@ class JSend
 	/**
 	 * Returns a JSend succes object with the given data.
 	 *
-	 * @param array|null $data = null
+	 * @param mixed $data = null
 	 * @return JSend a JSend succes object with the given data.
 	 */
-	public static function success(array $data = null)
+	public static function success($data = null)
 	{
 		return new self(self::SUCCESS, $data);
 	}
@@ -108,10 +108,10 @@ class JSend
 	/**
 	 * Returns a JSend fail object with the given data.
 	 *
-	 * @param array|null $data = null
+	 * @param mixed $data = null
 	 * @return JSend a JSend fail object with the given data.
 	 */
-	public static function fail(array $data = null)
+	public static function fail($data = null)
 	{
 		return new self(self::FAIL, $data);
 	}
@@ -121,10 +121,10 @@ class JSend
 	 *
 	 * @param string $message
 	 * @param int|null $code = null
-	 * @param array|null $data = null
+	 * @param mixed $data = null
 	 * @return JSend a JSend error object with the given message, code and data.
 	 */
-	public static function error($message, $code = null, array $data = null)
+	public static function error($message, $code = null, $data = null)
 	{
 		return new self(self::ERROR, $data, $message, $code);
 	}
@@ -296,7 +296,7 @@ class JSend
 	/**
 	 * Returns the data.
 	 *
-	 * @return array the data.
+	 * @return mixed the data.
 	 */
 	public function getData()
 	{
@@ -306,10 +306,10 @@ class JSend
 	/**
 	 * Set the data.
 	 *
-	 * @param array|null $data = null
+	 * @param mixed $data = null
 	 * @return JSend $this
 	 */
-	public function setData(array $data = null)
+	public function setData($data = null)
 	{
 		$this->data = $data;
 
