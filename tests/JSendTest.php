@@ -47,7 +47,7 @@ class JSendTest extends TestCase
 	/** @var JSend The JSend error object. */
 	private $error;
 
-	public function setUp()
+	public function setUp(): void
 	{
 		$this->success = new JSend(JSend::SUCCESS, $this->data);
 		$this->nullSuccess = new JSend(JSend::SUCCESS, $this->nullData);
@@ -111,6 +111,7 @@ class JSendTest extends TestCase
 	 */
 	public function testDecodeCannotDecode()
 	{
+		$this->expectException(\UnexpectedValueException::class);
 		JSend::decode('');
 	}
 
@@ -120,6 +121,7 @@ class JSendTest extends TestCase
 	 */
 	public function testDecodeNoStatus()
 	{
+		$this->expectException(\UnexpectedValueException::class);
 		JSend::decode('{}');
 	}
 
@@ -129,6 +131,7 @@ class JSendTest extends TestCase
 	 */
 	public function testDecodeSuccesRequireData()
 	{
+		$this->expectException(\UnexpectedValueException::class);
 		JSend::decode('{"status": "success"}');
 	}
 
@@ -138,6 +141,7 @@ class JSendTest extends TestCase
 	 */
 	public function testDecodeFailRequireData()
 	{
+		$this->expectException(\UnexpectedValueException::class);
 		JSend::decode('{"status": "fail"}');
 	}
 
@@ -147,6 +151,7 @@ class JSendTest extends TestCase
 	 */
 	public function testDecodeErrorRequireMessage()
 	{
+		$this->expectException(\UnexpectedValueException::class);
 		JSend::decode('{"status": "error"}');
 	}
 
@@ -156,6 +161,7 @@ class JSendTest extends TestCase
 	 */
 	public function testDecodeExistingStatus()
 	{
+		$this->expectException(\UnexpectedValueException::class);
 		JSend::decode('{"status": "test"}');
 	}
 
@@ -223,7 +229,9 @@ class JSendTest extends TestCase
 	 */
 	public function testExceptionSetStatus()
 	{
+		$this->expectException(\UnexpectedValueException::class);
 		$this->success->setStatus('test');
+		
 		$this->nullSuccess->setStatus('test');
 	}
 
