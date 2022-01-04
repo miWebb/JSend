@@ -2,11 +2,15 @@ build:
     tests:
         override:
             -
-                command: 'vendor/bin/phpunit --coverage-clover=my-coverage-file'
+                command: XDEBUG_MODE=coverage ./vendor/bin/phpunit --colors --coverage-clover=my-coverage-file --verbose
                 coverage:
                     file: 'my-coverage-file'
                     format: 'php-clover'
-
+    nodes:
+        analysis:
+            tests:
+                override:
+                    - php-scrutinizer-run
 checks:
     php:
         argument_type_checks: true

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit bootstrap="vendor/autoload.php">
 	<testsuites>
-		<testsuite>
+		<testsuite name="miWebb/JSend">
 			<directory>tests/</directory>
 		</testsuite>
 	</testsuites>
-	<filter>
-		<whitelist>
+	<coverage>
+		<include>
 			<directory suffix=".php">src/</directory>
-		</whitelist>
-	</filter>
-	<logging>
-		<log type="coverage-html" target="phpunit/coverage/" />
-	</logging>
+		</include>
+		<report>
+			<html outputDirectory="phpunit/coverage/" lowUpperBound="50" highLowerBound="90"/>
+		</report>
+	</coverage>
 	<php>
 		<ini name="display_errors" value="On" />
 		<ini name="display_startup_errors" value="On" />
